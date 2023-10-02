@@ -8,4 +8,13 @@ date: "2023-10-02"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Project Description
+
+# Camera Traffic Counts
+
+## Overview
+
+Our data set was created and taken by the official City of Austin open data portal, data.austintexasgov. The dataset represents traffic count data collected from the several GRIDSMART optical traffic detectors deployed by the City of Austin. In the data set, the average speed measurements may not have been calibrated for all intersections. All measurements have been collected using automated machine vision processes and have not been validated. Our data set was last updated October 2nd, 2023 and has 75.7 million rows and 19 columns. Each row can be seen as aggregated traffic counts and speeds for a 15-minute interval. Columns in the data set contain but are not limited to, Intersection Name, Heavy Vehicle, Direction, Volume, Speed Average (Miles Per Hour), Month, Day, and Year. Our immediate goals are to find and understand the relationships between X and Y. and Z and Q. Our first hypothesis relates to Traffic Volume and Time of Day Relationship. Specifically, there is a significant relationship between the time of day and the traffic volume at intersections. Our null hypothesis in relation to this is, there is no significant relationship between the proportion of heavy vehicles and the average speed at intersections. Our second hypothesis relates to Heavy Vehicle Traffic and Average Speed Relationship. Specifically, intersections with a higher proportion of heavy vehicles have a lower average speed. Our null hypothesis in relation to this is, there is no significant relationship between the proportion of heavy vehicles and the average speed at intersections. Holistically, our goals as a group are to strenuously test the aforementioned hypothesis and to create visual tools that represent our findings in a neat and informational manner. To do this, we will utilize R commands and data visualization tools. 
+
+
+## Link to Data 
+[Data Set](https://data.austintexas.gov/Transportation-and-Mobility/Camera-Traffic-Counts/sh59-i6y9)
