@@ -49,3 +49,25 @@ ggplot(incident_summary, aes(x = detector_status, y = incident_count, fill = det
 
 
 ```
+
+#Visualization Number Two
+```{r}
+
+type_by_direction <- Traffic_Counts %>%
+  group_by(detector_type, detector_direction) %>%
+  summarise(count = n()) %>%
+  ungroup()
+
+
+ggplot(type_by_direction, aes(x = detector_direction, y = count, fill = detector_type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Count of Detector Types by Direction",
+    x = "Detector Direction",
+    y = "Count of Detectors"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
