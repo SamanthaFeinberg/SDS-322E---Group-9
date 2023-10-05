@@ -1,0 +1,73 @@
+---
+title: "Camera Traffic Detectors"
+output: github_document
+---
+
+# Camera Traffic Detectors
+
+## Overview
+
+The dataset under examination has been meticulously maintained and updated by the Arterial Management Division of the City of Austin Transportation & Public Works Department. This comprehensive dataset provides in-depth information about various traffic detectors strategically positioned at signalized intersections across Austin, Texas. As of October 4, 2023, this dataset comprises a total of 5,759 rows and 15 columns, with each row corresponding to a unique traffic detector.
+
+Columns in the dataset, which are not limited to detector_id, detector_type, detector_status, detector_direction, detector_movement, location_name, and atd_location_id, jointly offer detailed insights into each traffic detector. These include the types of detectors, their operational statuses, the directions and movements they service, their physical locations, and unique identifiers for their locations.
+
+The first hypothesis seeks to explore the potential relationship between detector types (Loop or Gridsmart) and their operational statuses (OK, Broken, Removed, or Inactive). The assumption here is that due to advanced technology, Gridsmart detectors might demonstrate superior operational stability and lower failure rates compared to Loop detectors. The null hypothesis for this scenario posits no significant relationship between detector types and their operational statuses.
+
+For the second hypothesis, the focus is on examining the relationship between detector types and the direction of traffic they monitor. It's hypothesized that the distribution of detector types might vary across different traffic directions, potentially due to installation preferences or technological suitability for specific traffic flows. The corresponding null hypothesis asserts that there is no significant relationship between the types of detectors and the traffic directions they monitor.
+
+Through the rigorous testing of these hypotheses, the analysis aims to unearth crucial relationships and patterns within the dataset, thereby offering valuable insights that the City of Austin could leverage to enhance the efficiency and reliability of its traffic detection and management systems. The results of the analyses will be depicted through clear, accessible visualizations crafted using various data visualization tools and techniques. This approach ensures that the findings are easily understandable by audiences with varied technical expertise, with a strong commitment to accuracy and thoroughness in interpreting the data within the dataset.
+
+
+
+## Link to Data 
+[Data Set](https://data.austintexas.gov/Transportation-and-Mobility/Camera-Traffic-Counts/sh59-i6y9)
+
+```{r}
+Traffic_Counts<- read.csv("Traffic_Detectors.csv")
+library(ggplot2)
+library(dplyr)
+
+```
+
+#Visualization Number One
+```{r}
+
+incident_summary <- Traffic_Counts %>%
+  group_by(detector_status) %>%
+  summarise(incident_count = sum(signal_id, na.rm = TRUE)) %>%
+  arrange(-incident_count)
+
+ggplot(incident_summary, aes(x = detector_status, y = incident_count, fill = detector_status)) +
+  geom_bar(stat = "identity", show.legend = FALSE, width=0.6) +
+  labs(
+    title = "Traffic Incidents by Equipment Status",
+    x = "Equipment Status",
+    y = "Number of Traffic Incidents"
+  ) +
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+
+
+```
+
+#Visualization Number Two
+```{r}
+
+type_by_direction <- Traffic_Counts %>%
+  group_by(detector_type, detector_direction) %>%
+  summarise(count = n()) %>%
+  ungroup()
+
+
+ggplot(type_by_direction, aes(x = detector_direction, y = count, fill = detector_type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Count of Detector Types by Direction",
+    x = "Detector Direction",
+    y = "Count of Detectors"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
