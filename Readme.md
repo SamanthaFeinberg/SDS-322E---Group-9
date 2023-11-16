@@ -71,6 +71,17 @@ library(dplyr)
     ## 
     ##     intersect, setdiff, setequal, union
 
+``` r
+library(lubridate)
+```
+
+    ## 
+    ## Attaching package: 'lubridate'
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     date, intersect, setdiff, union
+
 \#Visualization Number One
 
 ``` r
@@ -117,3 +128,46 @@ ggplot(type_by_direction, aes(x = detector_direction, y = count, fill = detector
 ```
 
 ![](Readme_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+\#Visualization Number 3
+
+``` r
+  Traffic_Counts %>%
+     group_by(detector_direction) %>%
+     summarise(average_incident_count = mean(signal_id)) %>%
+     ggplot(aes(x = detector_direction, y = average_incident_count, fill = detector_direction)) +
+     geom_bar(stat = "identity", show.legend = FALSE) +
+     labs(title = "Average Incident Count by Detector Direction",
+          x = "Detector Direction",
+          y = "Average Incident Count") +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+    ## Warning: Removed 2 rows containing missing values (`position_stack()`).
+
+![](Readme_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+\#Visualization Number 4
+
+``` r
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(stringr)
+
+ggplot(Traffic_Counts, aes(x = LOCATION, y = as.factor(signal_id), fill = LOCATION)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Frequency of Signal ID by Location",
+       x = "Location Groups",
+       y = "Frequency") +
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_text(),
+        axis.text.y = element_blank(),
+        axis.title.y = element_text(),
+        legend.position = "none") +
+  coord_cartesian(xlim = c(0, 1100)) 
+```
+
+![](Readme_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+\#Regression or Classification

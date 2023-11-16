@@ -75,15 +75,15 @@ ggplot(type_by_direction, aes(x = detector_direction, y = count, fill = detector
 
 #Visualization Number 3
 ```{r}
-Traffic_Counts <- Traffic_Counts %>%
-     mutate(modified_date = as.Date(modified_date, format = "%Y-%m-%d"),
-            current_date = Sys.Date(),
-            detector_age = as.numeric(difftime(current_date, modified_date, units = "days")))
-   Traffic_Counts$operational_status_num <- ifelse(Traffic_Counts$detector_status == "OK", 1, 0)
-   
-   model <- lm(operational_status_num ~ detector_age, data = Traffic_Counts)
-   summary(model)
-
+  Traffic_Counts %>%
+     group_by(detector_direction) %>%
+     summarise(average_incident_count = mean(signal_id)) %>%
+     ggplot(aes(x = detector_direction, y = average_incident_count, fill = detector_direction)) +
+     geom_bar(stat = "identity", show.legend = FALSE) +
+     labs(title = "Average Incident Count by Detector Direction",
+          x = "Detector Direction",
+          y = "Average Incident Count") +
+     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 
@@ -109,9 +109,11 @@ ggplot(Traffic_Counts, aes(x = LOCATION, y = as.factor(signal_id), fill = LOCATI
 ```
 
 
-
-
 #Regression or Classification 
+```{r}
+
+```
+
 
 
 
