@@ -26,6 +26,7 @@ Through the rigorous testing of these hypotheses, the analysis aims to unearth c
 Traffic_Counts<- read.csv("Traffic_Detectors.csv")
 library(ggplot2)
 library(dplyr)
+library(lubridate)
 
 ```
 
@@ -71,4 +72,46 @@ ggplot(type_by_direction, aes(x = detector_direction, y = count, fill = detector
 
 
 ```
+
+#Visualization Number 3
+```{r}
+Traffic_Counts <- Traffic_Counts %>%
+     mutate(modified_date = as.Date(modified_date, format = "%Y-%m-%d"),
+            current_date = Sys.Date(),
+            detector_age = as.numeric(difftime(current_date, modified_date, units = "days")))
+   Traffic_Counts$operational_status_num <- ifelse(Traffic_Counts$detector_status == "OK", 1, 0)
+   
+   model <- lm(operational_status_num ~ detector_age, data = Traffic_Counts)
+   summary(model)
+
+
+```
+
+
+#Visualization Number 4
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(stringr)
+
+ggplot(Traffic_Counts, aes(x = LOCATION, y = as.factor(signal_id), fill = LOCATION)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Frequency of Signal ID by Location",
+       x = "Location Groups",
+       y = "Frequency") +
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_text(),
+        axis.text.y = element_blank(),
+        axis.title.y = element_text(),
+        legend.position = "none") +
+  coord_cartesian(xlim = c(0, 1100)) 
+```
+
+
+
+
+#Regression or Classification 
+
+
 
