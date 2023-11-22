@@ -5,7 +5,7 @@ Camera Traffic Detectors
 
 ## Overview
 
-The dataset under examination has been meticulously maintained and
+The data set under examination has been meticulously maintained and
 updated by the Arterial Management Division of the City of Austin
 Transportation & Public Works Department. This comprehensive dataset
 provides in-depth information about various traffic detectors
@@ -38,8 +38,23 @@ corresponding null hypothesis asserts that there is no significant
 relationship between the types of detectors and the traffic directions
 they monitor.
 
+The third hypothesis explores a different aspect of the data, focusing
+on the directional orientation of the detectors and its potential impact
+on traffic incident frequencies. It is assumed there is a significant
+correlation between the direction the traffic detector faces (e.g.,
+North, South, East, West) and the frequency of traffic incidents in that
+direction. Furthermore, it states that certain directions may have
+higher incident frequencies, possibly due to factors like road design,
+traffic flow, or other characteristics.
+
+Our fourth and final hypothesis proposes The frequency of traffic
+incidents is correlated with the physical placement location of the
+traffic detectors. This hypothesis suggests that certain locations,
+possibly due to higher traffic volume or complex traffic patterns, have
+a higher frequency of incidents.
+
 Through the rigorous testing of these hypotheses, the analysis aims to
-unearth crucial relationships and patterns within the dataset, thereby
+unearth crucial relationships and patterns within the data set, thereby
 offering valuable insights that the City of Austin could leverage to
 enhance the efficiency and reliability of its traffic detection and
 management systems. The results of the analyses will be depicted through
@@ -170,4 +185,69 @@ ggplot(Traffic_Counts, aes(x = LOCATION, y = as.factor(signal_id), fill = LOCATI
 
 ![](Readme_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-\#Regression or Classification
+\#Regression
+
+We will utilize a linear Regression for Detector Age and Operational
+Status: essentially using linear regression to model the relationship
+between the age of detectors and the current operational status of the
+detectors as analyzed through a numerical score.
+
+``` r
+  library(dplyr)
+  library(ggplot2)
+  library(lubridate)
+
+Traffic_Counts1 <- Traffic_Counts %>%
+  mutate(modified_date = mdy_hms(modified_date))  
+
+Traffic_Counts2 <- Traffic_Counts1 %>%
+  mutate(date_only = as.Date(modified_date)) %>%
+  mutate(detector_status_num = case_when(detector_status == "OK" ~ 1,
+                                         TRUE ~ 0))
+
+Traffic_Counts3 <- Traffic_Counts2 %>%
+  group_by(date_only)
+
+model <- lm(detector_status_num ~ modified_date, data = Traffic_Counts3)
+summary(model)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = detector_status_num ~ modified_date, data = Traffic_Counts3)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -0.7464 -0.4428  0.2834  0.3269  1.8458 
+    ## 
+    ## Coefficients:
+    ##                 Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)   -1.283e+01  3.221e-01  -39.83   <2e-16 ***
+    ## modified_date  8.003e-09  1.923e-10   41.61   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.434 on 5757 degrees of freedom
+    ## Multiple R-squared:  0.2312, Adjusted R-squared:  0.2311 
+    ## F-statistic:  1732 on 1 and 5757 DF,  p-value: < 2.2e-16
+
+\#Explanation of Regression
+
+The summary of this linear regression model will provide information
+about the relationship between the modified date and the operational
+status of the detectors. This model include coefficients for the
+intercept and the slope of the variable modified date, which represents
+the model’s estimation of the average starting value and the average
+rate of change of the dependent variable with respect to the independent
+variable. The standard errors, t-values, and p-values associated with
+these coefficients help assess their significance in terms of how more
+recently modified detectors may have varying operational statuses. A low
+p-value suggests that the corresponding coefficient is statistically
+significant, indicating a meaningful relationship. The R-squared value
+indicates the proportion of variability in the dependent variable
+explained by the model. Additionally, the residuals’ statistics provide
+insights into the model’s goodness of fit and assumptions, helping to
+evaluate if the model adequately captures the underlying patterns in the
+data. Overall, the summary serves as a guide to interpreting how the
+modification date of the detector may impact how it performs in order to
+accurately capture the traffic patterns in Austin.
