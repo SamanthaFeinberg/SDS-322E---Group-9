@@ -1,5 +1,5 @@
 ---
-title: "Austin Traffic Detectors Website"
+title: "Austin Traffic Detectors"
 output: html_document
 date: "2023-11-27"
 ---
@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Austin Traffic Detectors
+
+![Traffic](https://www.austintexas.gov/sites/default/files/images/Transportation/Home_Page_Gallery/ATD_Arterial_Management_Image_1.jpg)
 
 ## Introduction
 
@@ -36,26 +38,26 @@ In each case, the data was partitioned into training and test sets, a standard p
 
 ### Visualization 1
 
-![Model 1](https://edupod.cns.utexas.edu/rstudio/files/SDS-322E---Group-9/Model%201.png)
+![Model 1](https://raw.githubusercontent.com/tveen19/SDS-322E---Group-9/project-part-one/Model%201.png)
 
 The objective evaluation of the traffic detector data, visualized through a bar chart, used incident count as the evaluation metric, indicating that detectors in 'OK' status are associated with the highest number of incidents, potentially due to their placement in high-traffic areas. In contrast, 'INACTIVE' and 'REMOVED' detectors also show notable incident figures, hinting at the possibility that non-functioning detectors negatively impact traffic flow and safety. 'BROKEN' detectors correlate with fewer incidents, possibly reflecting less traffic or effective maintenance protocols. The interpretation of these results is constrained by potential limitations, such as data accuracy, unaccounted external variables, and the lack of causative conclusions from the observed correlations. These challenges highlight the need for a more nuanced analysis, taking into account time-series, to fully understand the detectors' performance and their relationship with traffic incidents.
 
 ### Visualization 2
 
-![Model 2](https://edupod.cns.utexas.edu/rstudio/files/SDS-322E---Group-9/Model%202.png)
+![Model 2](https://raw.githubusercontent.com/tveen19/SDS-322E---Group-9/project-part-one/Model%202.png)
 
 The second model examines the distribution of different types of traffic detectors across various directions, employing a grouped bar chart as a visualization tool. The evaluation metric here is the count of detectors, segmented by type and direction, which provides a direct measure of detector prevalence. The visualization suggests a variance in detector type distribution across directions, which could indicate a strategic placement based on traffic flow characteristics or technological requirements of the detectors. However, this model's interpretation comes with limitations. The chart does not reveal why certain detector types are more prevalent in certain directions; it only shows the existence of such a trend. External factors influencing these placements, such as urban planning decisions or historical traffic data, are not considered, which might be crucial for a comprehensive understanding. 
 
 
 ### Visualization 3
 
-![Model 3](https://edupod.cns.utexas.edu/rstudio/files/SDS-322E---Group-9/Model%203.png)
+![Model 3](https://raw.githubusercontent.com/tveen19/SDS-322E---Group-9/project-part-one/Model%203.png)
 
 The visualization presents an analysis of the average incident count by traffic detector direction, using mean values as the evaluation metric. Interpreting these findings suggests that detector direction could have a relationship with the incidence of traffic events. In other words, directions with higher averages might be critical areas that require more attention from traffic management authorities. However, there are limitations in the model and the visualization: a warning indicates that two rows with missing values were removed, which could affect the overall accuracy of the average incident counts. Moreover, the model assumes that the average is a robust measure of central tendency, which may not account for outliers or skewed distributions. To draw more comprehensive conclusions, it might be necessary to explore the data further, possibly including other statistical measures like median or mode, and to consider other potential contributing factors to the incidents.
 
 ### Visualization 4
 
-![Model 4](https://edupod.cns.utexas.edu/rstudio/files/SDS-322E---Group-9/Model%204.png)
+![Model 4](https://raw.githubusercontent.com/tveen19/SDS-322E---Group-9/project-part-one/Model%204.png)
 
 The visualization titled "Frequency of Signal ID by Location" is a bar chart representing the occurrence of signal IDs across different locations. The bars are colored by location, and the y-axis represents the frequency of each signal ID as a factor, which implies a count of occurrences. From this visualization, we can interpret that some locations have a higher frequency of signal IDs, which might indicate areas with more traffic detection or possibly areas with more traffic flow or incidents. However, the x-axis text has been intentionally blanked out, making it difficult to identify which specific locations correspond to the frequencies shown. The decision to remove axis text and legend could be a limitation if the chart is to be used for detailed analysis or presentation, as it lacks clear labels that would allow for easy identification of specific locations. To improve this model and visualization, it might be beneficial to include axis labels for clarity and to consider whether treating signal IDs as factors is the most effective approach for the intended analysis.
 
@@ -66,4 +68,10 @@ Respect for Privacy: This project involves collecting and analyzing data from tr
 Fairness and Equity: The project's goal to optimize traffic flow and enhance safety should be equitably beneficial to all city residents, regardless of their location or socioeconomic status. There's a risk that such data-driven initiatives might favor certain areas over others, potentially leading to unequal resource allocation. For instance, prioritizing traffic improvements in wealthier or more developed parts of the city can inadvertently neglect the needs of less affluent neighborhoods. Ethically, it's essential to analyze and use the traffic data in a manner that promotes equitable benefits across the city. This means considering the impact of traffic management decisions on all communities, ensuring that the enhancements in traffic flow, safety measures, and environmental impacts are distributed fairly across different areas of the city.
 Social Responsibility: The project holds significant potential for positive societal impact, particularly in enhancing public safety and reducing environmental harm. Ethically, it's crucial to ensure that the insights derived from the traffic data are used responsibly to serve the broader public interest. This includes making data-driven decisions that improve traffic safety, reduce congestion, and minimize the environmental footprint of urban transportation. The ethical obligation extends to transparent communication with the public about how their data is being used and the benefits it brings. Additionally, there should be a continuous assessment of the societal impacts of the project, ensuring that the outcomes align with the broader goals of public welfare and sustainable urban development. 
 In summary, while the project presents valuable opportunities for improving urban transportation in Austin, it's imperative to navigate the ethical dimensions of privacy, fairness, and social responsibility to ensure that the project contributes positively and equitably to the community.
+
+## References
+
+“Advantages of Traffic Signals.” City of Irvine, 13 June 2015 [Irvine Reference](https://www.cityofirvine.org/signal-operations-maintenance/advantages-traffic-signals#:~:text=By%20alternately%20assigning%20right%20of,move%20safely%20through%20an%20intersection.)
+
+Shaw, Jeffery. “Signalized Intersections Informational Guide - 2nd Edition.” Federal Highway Administration, US Department of Transportation , July 2020 [Federal Highway Reference](https://safety.fhwa.dot.gov/404.cfm?aspxerrorpath=/intersection/signal/fhwasa13027.pdf.)
 
