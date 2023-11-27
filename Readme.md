@@ -67,7 +67,7 @@ interpreting the data within the dataset.
 ## Link to Data
 
 [Data
-Set](https://data.austintexas.gov/Transportation-and-Mobility/Camera-Traffic-Counts/sh59-i6y9)
+Set](https://data.austintexas.gov/Transportation-and-Mobility/Traffic-Detectors/qpuw-8eeb)
 
 ``` r
 Traffic_Counts<- read.csv("Traffic_Detectors.csv")
